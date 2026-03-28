@@ -2,8 +2,7 @@ name: Build APK
 
 on:
 push:
-branches:
-- main
+branches: [ "main" ]
 workflow_dispatch:
 
 jobs:
@@ -12,19 +11,19 @@ runs-on: ubuntu-latest
 
 ```
 steps:
-  - name: Checkout project
+  - name: Checkout
     uses: actions/checkout@v3
 
-  - name: Setup JDK
+  - name: Setup Java
     uses: actions/setup-java@v3
     with:
-      distribution: 'temurin'
-      java-version: '17'
+      distribution: temurin
+      java-version: 17
 
-  - name: Grant execute permission
+  - name: Grant permission
     run: chmod +x gradlew
 
-  - name: Build Debug APK
+  - name: Build APK
     run: ./gradlew assembleDebug
 
   - name: Upload APK
